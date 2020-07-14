@@ -4,11 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SuperheroCreatorProj.Models;
+using SuperheroCreatorProj.Data;
 
 namespace SuperheroCreatorProj.Controllers
 {
     public class SuperheroesController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public SuperheroesController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         // GET: SuperheroesController
         public ActionResult Index()
         {
@@ -30,10 +38,12 @@ namespace SuperheroCreatorProj.Controllers
         // POST: SuperheroesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Superhero superhero)
         {
             try
             {
+                _context.Superheroes.Add(superhero);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -72,10 +82,12 @@ namespace SuperheroCreatorProj.Controllers
         // POST: SuperheroesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Superhero superhero)
         {
             try
             {
+                _context.Superheroes.Remove(superhero);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
