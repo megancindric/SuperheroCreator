@@ -10,10 +10,20 @@ namespace SuperheroCreatorProj.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Superhero Name is required!")]
         public string SuperheroName { get; set; }
+
+        [Required]
         public string AlterEgoName { get; set; }
+
+        [Required]
         public string PrimaryAbility { get; set; }
+
+        [Required]
         public string SecondaryAbility { get; set; }
+
+        [Required]
         public string Catchphrase { get; set; }
 
     }

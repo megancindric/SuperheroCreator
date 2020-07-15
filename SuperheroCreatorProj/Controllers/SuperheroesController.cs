@@ -62,7 +62,7 @@ namespace SuperheroCreatorProj.Controllers
         // POST: SuperheroesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Superhero superhero)
+        public ActionResult Edit(Superhero superhero)
         {
             _context.Update(superhero);
             _context.SaveChanges();
@@ -78,7 +78,7 @@ namespace SuperheroCreatorProj.Controllers
         // POST: SuperheroesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Superhero superhero)
+        public ActionResult Delete(Superhero superhero)
         {
 
             _context.Superheroes.Remove(superhero);
