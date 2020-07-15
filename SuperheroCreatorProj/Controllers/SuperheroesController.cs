@@ -26,7 +26,7 @@ namespace SuperheroCreatorProj.Controllers
         // GET: SuperheroesController/Details/5
         public ActionResult Details(int id)
         {
-            return View(_context.Superheroes.Where(m => m.Id == id).FirstOrDefault());
+            return View(_context.Superheroes.Where(m => m.Id == id).Single());
         }
 
         // GET: SuperheroesController/Create
@@ -53,9 +53,10 @@ namespace SuperheroCreatorProj.Controllers
         }
 
         // GET: SuperheroesController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, Superhero superhero)
         {
-            return View();
+            
+                return View(_context.Superheroes.Where(m => m.Id == id).Single());
         }
 
         // POST: SuperheroesController/Edit/5
@@ -76,7 +77,7 @@ namespace SuperheroCreatorProj.Controllers
         // GET: SuperheroesController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_context.Superheroes.Where(m => m.Id == id).Single());
         }
 
         // POST: SuperheroesController/Delete/5
@@ -84,16 +85,11 @@ namespace SuperheroCreatorProj.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Superhero superhero)
         {
-            try
-            {
-                _context.Superheroes.Remove(superhero);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
+            _context.Superheroes.Remove(superhero);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
+
     }
 }
