@@ -40,16 +40,24 @@ namespace SuperheroCreatorProj.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Superhero superhero)
         {
-            try
+            if(ModelState.IsValid)
             {
-                _context.Superheroes.Add(superhero);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Superheroes.Add(superhero);
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
+            else
             {
-                return View();
+                return View(superhero);
             }
+            
         }
 
         // GET: SuperheroesController/Edit/5
@@ -64,9 +72,23 @@ namespace SuperheroCreatorProj.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Superhero superhero)
         {
-            _context.Update(superhero);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Superheroes.Update(superhero);
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return View(superhero);
+            }
         }
 
         // GET: SuperheroesController/Delete/5
