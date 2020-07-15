@@ -26,7 +26,7 @@ namespace SuperheroCreatorProj.Controllers
         // GET: SuperheroesController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_context.Superheroes.Where(m => m.Id == id).FirstOrDefault());
         }
 
         // GET: SuperheroesController/Create
